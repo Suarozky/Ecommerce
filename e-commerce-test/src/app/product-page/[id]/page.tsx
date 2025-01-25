@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 "use client";
 
 import Link from "next/link";
@@ -38,6 +38,7 @@ export default function ProductPage() {
     }
   }, [params.id]);
 
+  if (!product) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col min-h-screen text-[#00334e] w-full bg-[#dbebfa] justify-center items-center relative">
@@ -52,8 +53,8 @@ export default function ProductPage() {
                 </button>
               </Link>
               <img
-                src={product!.image}
-                alt={product!.title}
+                src={product.image}
+                alt={product.title}
                 width={1020}
                 height={1080}
                 className="w-full rounded-3xl object-contain"
@@ -63,7 +64,7 @@ export default function ProductPage() {
             <div className="flex flex-col gap-4 w-full sm:w-1/2 h-full">
               <div className="flex items-center justify-between h-16">
                 <span className="text-2xl font-bold line-clamp-2 mt-12 font-space">
-                  {product!.title}
+                  {product.title}
                 </span>
               </div>
 
@@ -73,14 +74,14 @@ export default function ProductPage() {
               </div>
 
               <span className="text-2xl font-bold h-12 font-space">
-                {product!.currency} {product!.price.toFixed(2)}
+                {product.currency} {product.price.toFixed(2)}
               </span>
 
               <span className="h-8 font-space">Cantidad</span>
 
               <div className="h-24 overflow-auto">
                 <span className="text-gray-600 font-space">
-                  {product!.description}
+                  {product.description}
                 </span>
               </div>
 
@@ -88,7 +89,7 @@ export default function ProductPage() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    dispatch(addToCart(product!));
+                    dispatch(addToCart(product));
                   }}
                   className="w-full p-4 flex gap-8 justify-center items-center bg-[#00334e] text-white rounded-2xl font-space text-xl hover:scale-95 transform transition-transform duration-800"
                 >
