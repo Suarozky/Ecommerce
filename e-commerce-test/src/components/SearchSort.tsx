@@ -1,13 +1,13 @@
-'use client';
-
-import { Search } from 'lucide-react';
+"use client"
+import React, { useCallback, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback } from 'react';
+import { Search } from 'lucide-react';
 import { useDebounce } from '../hook/useDebounce';
 
-export function SearchSort() {
+export const SearchSort = React.memo(() => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -18,13 +18,23 @@ export function SearchSort() {
     [searchParams]
   );
 
-  const debouncedSearch = useDebounce((term: string) => {
-    router.push('?' + createQueryString('search', term));
-  }, 300);
+  const debouncedSearch = useDebounce(
+    useCallback((term: string) => {
+      router.push('?' + createQueryString('search', term));
+    }, [createQueryString, router]),
+    300
+  );
+
 
   const handleSort = (value: string) => {
-    router.push('?' + createQueryString('sort', value));
+    router.replace('?' + createQueryString('sort', value), { scroll: false });
   };
+
+
+  const defaultSortValue = useMemo(() => 
+    searchParams.get('sort') || 'price', 
+    [searchParams]
+  );
 
   return (
     <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -40,7 +50,7 @@ export function SearchSort() {
 
       <select
         onChange={(e) => handleSort(e.target.value)}
-        defaultValue={searchParams.get('sort') || 'price'}
+        defaultValue={defaultSortValue}
         className="w-full sm:w-auto max-w-full px-8 py-4 text-[#00334e] border border-[#00334e] rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#dbebfa] appearance-none shadow-md hover:shadow-lg transition-all duration-200 ease-in-out hover:scale-95 transform cursor-pointer"
       >
         <option value="price">Sort by Price</option>
@@ -48,4 +58,6 @@ export function SearchSort() {
       </select>
     </div>
   );
-}
+});
+
+SearchSort.displayName = 'SearchSort';

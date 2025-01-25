@@ -17,19 +17,25 @@ export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const products = await getProducts();
-        const foundProduct = products.find(
-          (p: Product) => p.id.toString() === params.id
-        );
-        setProduct(foundProduct);
-      } catch (error) {
-        console.error("Failed to fetch product:", error);
-      }
-    };
+    if (typeof window !== "undefined") {
 
-    fetchProduct();
+      document
+      .querySelectorAll('[cz-shortcut-listen]')
+      .forEach((el) => el.removeAttribute('cz-shortcut-listen'));
+      // Browser-specific logic here
+      const fetchProduct = async () => {
+        try {
+          const products = await getProducts();
+          const foundProduct = products.find(
+            (p: Product) => p.id.toString() === params.id
+          );
+          setProduct(foundProduct);
+        } catch (error) {
+          console.error("Failed to fetch product:", error);
+        }
+      };
+      fetchProduct();
+    }
   }, [params.id]);
 
   if (!product) return <div>Loading...</div>;
