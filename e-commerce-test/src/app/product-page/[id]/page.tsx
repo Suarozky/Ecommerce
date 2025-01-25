@@ -11,7 +11,6 @@ import { getProducts } from "@/lib/products";
 import { addToCart } from "@/lib/redux/cartSlice";
 import { useDispatch } from "react-redux";
 
-
 export default function ProductPage() {
   const params = useParams();
   const dispatch = useDispatch();
@@ -37,12 +36,12 @@ export default function ProductPage() {
 
   return (
     <div className="flex flex-col min-h-screen text-[#00334e] w-full bg-[#dbebfa] justify-center items-center relative">
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-5xl px-4 sm:px-8">
         <div className="bg-white flex flex-col justify-between items-center p-8 rounded-2xl shadow-lg">
-          <div className="flex gap-8 w-full">
-            <div className="flex flex-col w-1/2">
+          <div className="flex flex-col sm:flex-row gap-8 w-full">
+            <div className="flex flex-col w-full sm:w-1/2">
               <Link href="/" passHref>
-                <button className="flex justify-center gap-2 text-[#00334e] items-center h-8 w-20  rounded-3xl mb-2 self-start hover:scale-95 transform transition-transform duration-800">
+                <button className="flex justify-center gap-2 text-[#00334e] items-center h-8 w-20 rounded-3xl mb-2 self-start hover:scale-95 transform transition-transform duration-800">
                   <FiArrowLeft size={16} className="text-[#00334e] text-2xl" />
                   <span className="font-space"> Atras</span>
                 </button>
@@ -52,11 +51,11 @@ export default function ProductPage() {
                 alt={product.title}
                 width={1020}
                 height={1080}
-                className="rounded-3xl"
+                className="w-full rounded-3xl object-contain"
               />
             </div>
 
-            <div className="flex flex-col gap-4 w-1/2 h-full">
+            <div className="flex flex-col gap-4 w-full sm:w-1/2 h-full">
               <div className="flex items-center justify-between h-16">
                 <span className="text-2xl font-bold line-clamp-2 mt-12 font-space">
                   {product.title}
@@ -80,7 +79,7 @@ export default function ProductPage() {
                 </span>
               </div>
 
-              <div className="flex gap-4 items-center mt-auto">
+              <div className="flex gap-4 items-center mt-auto w-full">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();

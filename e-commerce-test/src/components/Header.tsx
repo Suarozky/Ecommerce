@@ -22,12 +22,13 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-[#00334e] font-space text-xl text-[#dbebfa] shadow-md z-50 h-20 rounded-sm">
-      <div className="container mx-auto px-2 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold hover:scale-95 cursor-pointer">
-          E-commerce Store
-        </h1>
-        <div className="flex items-center space-x-4 justify-center">
+    <header className="fixed top-0 left-0 right-0 bg-[#00334e] font-space text-xl text-[#dbebfa] shadow-md z-50 h-20 rounded-sm w-full">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="text-2xl sm:text-6xl md:text-4xl lg:text-4xl w-52 font-bold hover:scale-95 cursor-pointer">
+          Greyball
+        </div>
+
+        <div className="flex items-center space-x-4 justify-center text-sm sm:text-base">
           <div
             className="relative hover:scale-95 cursor-pointer"
             onClick={toggleCartVisibility}
@@ -40,36 +41,34 @@ export function Header() {
             )}
           </div>
 
-          <div className=" font-bold font-space text-xl">
+          <div className="font-bold text-xl sm:text-lg">
             Total: USD {total.toFixed(2)}
           </div>
         </div>
       </div>
 
       {isCartVisible && (
-        <div className="absolute top-20 right-0 w-[550px] text-gray-600 rounded-b-3xl bg-white font-space cursor-pointer  shadow-xl z-40 max-h-80 overflow-y-auto border border-gray-200">
+        <div className="absolute top-20 right-0 w-full sm:w-[550px] text-gray-600 rounded-b-3xl bg-white font-space cursor-pointer shadow-xl z-40 max-h-80 overflow-y-auto border border-gray-200">
           <div className="p-4 border-b border-gray-200">
             <h2 className="text-lg font-bold text-[#00334e]">Cart Items</h2>
           </div>
           <ul className="divide-y divide-gray-100">
             {items.length === 0 ? (
-              <li className="p-4 text-[#00334e]0 text-center">
+              <li className="p-4 text-[#00334e] text-center">
                 Your cart is empty.
               </li>
             ) : (
               items.map((item) => (
                 <li
                   key={item.id}
-                  className="flex justify-center items-center p-4 hover:bg-gray-50 transition-colors"
+                  className="flex justify-between items-center p-4 hover:bg-gray-50 transition-colors"
                 >
-                  <div className="flex gap-10">
-                    <div>
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-8 h-8 object-cover rounded-lg"
-                      />
-                    </div>
+                  <div className="flex gap-4 items-center">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-8 h-8 object-cover rounded-lg"
+                    />
                     <span className="font-medium">{item.title}</span>
                     <span className="text-[#00334e] ml-2">
                       (x{item.quantity})
