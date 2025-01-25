@@ -19,9 +19,9 @@ export const SearchSort = React.memo(() => {
   );
 
   const debouncedSearch = useDebounce(
-    useCallback((term: string) => {
+    (term: string) => {
       router.push('?' + createQueryString('search', term));
-    }, [createQueryString, router]),
+    },
     300
   );
 
