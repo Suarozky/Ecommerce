@@ -14,6 +14,7 @@ export const SearchSort = React.memo(() => {
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
       return params.toString();
+      
     },
     [searchParams]
   );
