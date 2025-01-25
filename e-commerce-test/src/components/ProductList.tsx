@@ -40,7 +40,7 @@ export function ProductList({ initialProducts }: ProductListProps) {
           <div className="mt-8 text-center">
             <button
               onClick={loadMore}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-[#00334e] text-white px-6 py-2 rounded-lg hover:bg-[#00336e] transition-colors font-space"
             >
               Load More
             </button>

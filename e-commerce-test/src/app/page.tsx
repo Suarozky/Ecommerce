@@ -1,15 +1,13 @@
 // app/page.tsx
-import { ProductList } from "../components/ProductList";
-import { Header } from "../components/Header";
-import { SearchSort } from "../components/SearchSort";
-import { getProducts } from "../lib/products";
+import { ProductList } from "@/components/ProductList";
+import { SearchSort } from "@/components/SearchSort";
+import { getProducts } from "@/lib/products";
 
 export default async function Home() {
   const products = await getProducts();
-  
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Header />
+    <div className="min-h-screen bg-[#dbebfa]">
       <main className="container mx-auto px-4 pt-24 pb-12">
         <SearchSort />
         <ProductList initialProducts={products} />
