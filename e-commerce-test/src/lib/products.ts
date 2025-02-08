@@ -1,27 +1,17 @@
 export async function getProducts() {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch products: ${res.status} ${res.statusText}`);
+      throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
-    const contentType = res.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Response is not JSON");
-    }
+    const text = await res.text(); // Verifica qué devuelve la API
+    console.log("API Response:", text); // Muestra la respuesta en la consola
 
-    return await res.json();
+    return JSON.parse(text); // Convierte a JSON
   } catch (error) {
     console.error("Error fetching products:", error);
-    return null; // O devuelve un array vacío [] si prefieres
+    return null; // Devuelve null o un array vacío
   }
 }
